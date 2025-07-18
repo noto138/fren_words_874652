@@ -1,0 +1,2691 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>French Vocab Practice</title>
+    <link
+      rel="manifest"
+      href="data:application/json;base64,eyJuYW1lIjoiRnJlbmNoIFZvY2FiIFByYWN0aWNlIiwic2hvcnRfbmFtZSI6IkZyZW5jaFZvY2FiIiwic3RhcnRfdXJsIjoiLiIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiMyZTdkMzIiLCJ0aGVtZV9jb2xvciI6IiMyZTdkMzIiLCJpY29ucyI6W3sic3JjIjoiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCNGJXeHVjejBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01DOXpkbWNpSUhkcFpIUm9QU0l4TWpBaUlHaGxhV2RvZEQwaU1USXdJajQ4WTJseVkyeGxJR040UFNJMk1DSWdZM2s5SWpZd0lpQnlQU0kwTUNJZ1ptbHNiRDBpSXpKbE56UXpNaUl2UGp4MFpYaDBJSGcyUFNJMk1DSWdlVEk5SXpRaUlITjBlV3hsUFNKbWFXeHNPaU4zYUdsMFpWdG1iMjUwTFhOcGVtVTZNVEZ3ZUNJZ2RHVjRkQzFoYm1Ob2IzSTlTVVJCU3owOEwzUmxlSFErUEM5emRtYytQZz09Iiwic2l6ZXMiOiIxMjB4MTIwIiwidHlwZSI6ImltYWdlL3N2Zyt4bWwifV19"
+    />
+    <script src="https://code.responsivevoice.org/responsivevoice.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        color: #333;
+      }
+
+      .container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .header {
+        text-align: center;
+        color: white;
+        margin-bottom: 30px;
+      }
+
+      .header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        opacity: 0.9;
+        font-size: 1.1em;
+      }
+
+      .card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .practice-section {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .word-display {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px 0;
+        min-height: 150px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border: 2px dashed #dee2e6;
+      }
+
+      .selected-words {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        margin-bottom: 15px;
+      }
+
+      .word-tag {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 1.2em;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+      }
+
+      .word-main-line {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .inline-gender {
+        font-size: 0.8em;
+        font-weight: 700;
+        margin-right: 6px;
+        padding: 2px 5px;
+        border-radius: 8px;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+      }
+
+      .inline-gender.feminine {
+        background: rgba(231, 76, 60, 0.3);
+        color: #fff;
+        border: 1px solid rgba(231, 76, 60, 0.6);
+      }
+
+      .inline-gender.masculine {
+        background: rgba(52, 152, 219, 0.3);
+        color: #fff;
+        border: 1px solid rgba(52, 152, 219, 0.6);
+      }
+
+      .inline-translation {
+        font-size: 0.9em;
+        font-style: italic;
+        margin-top: 4px;
+        padding-top: 4px;
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
+        color: rgba(255, 255, 255, 0.9);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+      }
+
+      .category-label {
+        font-size: 0.9em;
+        opacity: 0.95;
+        margin-left: 5px;
+        font-weight: 500;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+      }
+
+      .empty-state {
+        color: #6c757d;
+        font-style: italic;
+      }
+
+      .controls {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 15px;
+      }
+
+      .btn {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 25px;
+        font-size: 1em;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      .btn-secondary {
+        background: #6c757d;
+      }
+
+      .btn-secondary:hover {
+        box-shadow: 0 5px 15px rgba(108, 117, 125, 0.4);
+      }
+
+      .btn-large {
+        flex: 2;
+        min-width: 160px;
+      }
+
+      .btn-small {
+        flex: 1;
+        min-width: 80px;
+      }
+
+      .hint-controls {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .hint-controls .btn {
+        flex: 1;
+        min-width: 140px;
+      }
+
+      .settings-section {
+        margin-top: 20px;
+      }
+
+      .category-group {
+        margin-bottom: 20px;
+      }
+
+      .category-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        padding: 10px 0;
+        border-bottom: 2px solid #e9ecef;
+      }
+
+      .category-title {
+        font-weight: 600;
+        color: #495057;
+        font-size: 1.1em;
+      }
+
+      .word-count {
+        background: #e9ecef;
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 0.9em;
+        color: #6c757d;
+      }
+
+      .word-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 10px;
+      }
+
+      .word-item {
+        background: #f8f9fa;
+        padding: 6px 12px;
+        border-radius: 15px;
+        font-size: 0.9em;
+        border: 1px solid #dee2e6;
+        position: relative;
+      }
+
+      .word-item:hover {
+        background: #e9ecef;
+      }
+
+      .remove-word {
+        color: #dc3545;
+        margin-left: 8px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      .add-word-form {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+        flex-wrap: wrap;
+      }
+
+      .add-word-input {
+        flex: 1;
+        padding: 8px 12px;
+        border: 1px solid #dee2e6;
+        border-radius: 20px;
+        font-size: 0.9em;
+        min-width: 120px;
+      }
+
+      .add-word-btn {
+        background: #28a745;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 0.9em;
+      }
+
+      .tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #e9ecef;
+      }
+
+      .tab {
+        background: none;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-bottom: 3px solid transparent;
+        font-size: 1em;
+        color: #6c757d;
+        transition: all 0.3s ease;
+      }
+
+      .tab.active {
+        color: #667eea;
+        border-bottom-color: #667eea;
+        font-weight: 600;
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      .word-selection {
+        margin-bottom: 20px;
+      }
+
+      .word-selection label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 8px;
+        font-weight: 500;
+      }
+
+      .word-selection input[type="number"] {
+        width: 60px;
+        padding: 5px;
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+      }
+
+      .level-selector {
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .level-range-selector {
+        margin-bottom: 20px;
+        text-align: center;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        border: 1px solid #dee2e6;
+      }
+
+      .level-range-selector label {
+        font-weight: 600;
+        margin-right: 10px;
+        color: #495057;
+      }
+
+      .level-range-selector select {
+        padding: 8px 12px;
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        margin: 0 5px;
+        font-size: 1em;
+      }
+
+      .custom-words-selector {
+        margin-bottom: 20px;
+        padding: 10px 12px 8px 12px;
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        background: #f8f9fa;
+      }
+
+      .speaker-icon,
+      .copy-icon,
+      .dict-icon,
+      .conjugation-icon,
+      .weight-icon {
+        cursor: pointer;
+        margin: 0 5px;
+        font-size: 1.2em;
+        opacity: 1;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));
+        transition: all 0.2s;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 3px;
+        padding: 2px 4px;
+      }
+
+      .speaker-icon:hover,
+      .copy-icon:hover,
+      .dict-icon:hover,
+      .conjugation-icon:hover,
+      .weight-icon:hover {
+        transform: scale(1.3);
+        filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.9));
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .conjugation-icon {
+        font-size: 0.7em;
+        background: rgba(255, 255, 255, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 4px;
+        padding: 3px 5px;
+        font-weight: bold;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+      }
+
+      .weight-controls button:hover {
+        background: rgba(255, 255, 255, 0.4) !important;
+        transform: scale(1.1);
+      }
+
+      .import-section {
+        margin-bottom: 30px;
+      }
+
+      .import-section h3 {
+        margin-bottom: 10px;
+        color: #495057;
+      }
+
+      .import-section p {
+        color: #6c757d;
+        margin-bottom: 15px;
+      }
+
+      .import-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .import-controls .btn {
+        margin: 5px;
+      }
+
+      .import-status {
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 5px;
+        display: none;
+      }
+
+      .import-status.success {
+        background: #d4edda;
+        border: 1px solid #c3e6cb;
+        color: #155724;
+        display: block;
+      }
+
+      .import-status.error {
+        background: #f8d7da;
+        border: 1px solid #f5c6cb;
+        color: #721c24;
+        display: block;
+      }
+
+      .search-container {
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      .search-input-container {
+        position: relative;
+      }
+
+      .search-suggestions {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        border: 1px solid #dee2e6;
+        border-top: none;
+        border-radius: 0 0 8px 8px;
+        max-height: 200px;
+        overflow-y: auto;
+        z-index: 1000;
+        display: none;
+      }
+
+      .suggestion-item {
+        padding: 8px 12px;
+        cursor: pointer;
+        border-bottom: 1px solid #f8f9fa;
+        font-size: 0.9em;
+      }
+
+      .suggestion-item:hover {
+        background: #f8f9fa;
+      }
+
+      .suggestion-item:last-child {
+        border-bottom: none;
+      }
+
+      .suggestion-word {
+        font-weight: 600;
+        color: #495057;
+      }
+
+      .suggestion-details {
+        font-size: 0.8em;
+        color: #6c757d;
+        margin-top: 2px;
+      }
+
+      .suggestion-custom {
+        background: #e3f2fd;
+        border-left: 3px solid #1976d2;
+      }
+
+      .suggestion-item.active {
+        background: #e3f2fd;
+      }
+
+      .no-suggestions {
+        padding: 12px;
+        text-align: center;
+        color: #6c757d;
+        font-style: italic;
+      }
+
+      .info-section {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        line-height: 1.6;
+      }
+
+      .info-section h3 {
+        color: #495057;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .info-section h4 {
+        color: #495057;
+        margin-top: 20px;
+        margin-bottom: 10px;
+      }
+
+      .info-section ul {
+        margin-left: 20px;
+        margin-bottom: 15px;
+      }
+
+      .info-section li {
+        margin-bottom: 5px;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          padding: 15px;
+        }
+
+        .header h1 {
+          font-size: 2em;
+        }
+
+        .controls,
+        .hint-controls {
+          flex-direction: column;
+        }
+
+        .btn {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🇫🇷 French Vocab</h1>
+        <p>Practice with random words</p>
+      </div>
+
+      <div class="card">
+        <div class="tabs">
+          <button class="tab active" data-tab="practice">Practice</button>
+          <button class="tab" data-tab="manage">Manage Words</button>
+          <button class="tab" data-tab="info">Info</button>
+        </div>
+
+        <div class="tab-content active" id="practice">
+          <div class="practice-section">
+            <div class="level-range-selector">
+              <label>Practice words from:</label>
+              <select id="levelStart" onchange="updateLevelRange()">
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+              </select>
+              <span>to</span>
+              <select id="levelEnd" onchange="updateLevelRange()">
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced" selected>Advanced</option>
+              </select>
+            </div>
+
+            <div class="word-selection">
+              <label>
+                <input type="checkbox" id="includeNouns" checked />
+                Noms (<span id="nounCount">0</span>) -
+                <input
+                  type="number"
+                  id="nounNumber"
+                  value="1"
+                  min="0"
+                  max="5"
+                />
+                words
+              </label>
+              <label>
+                <input type="checkbox" id="includeVerbs" checked />
+                Verbes (<span id="verbCount">0</span>) -
+                <input
+                  type="number"
+                  id="verbNumber"
+                  value="1"
+                  min="0"
+                  max="5"
+                />
+                words
+              </label>
+              <label>
+                <input type="checkbox" id="includeAdjectives" checked />
+                Adjectifs (<span id="adjectiveCount">0</span>) -
+                <input
+                  type="number"
+                  id="adjectiveNumber"
+                  value="1"
+                  min="0"
+                  max="5"
+                />
+                words
+              </label>
+              <label>
+                <input type="checkbox" id="includeAdverbs" />
+                Adverbes (<span id="adverbCount">0</span>) -
+                <input
+                  type="number"
+                  id="adverbNumber"
+                  value="1"
+                  min="0"
+                  max="5"
+                />
+                words
+              </label>
+            </div>
+
+            <div class="custom-words-selector">
+              <div
+                style="
+                  display: flex;
+                  gap: 12px;
+                  justify-content: center;
+                  align-items: center;
+                  flex-wrap: wrap;
+                  margin-bottom: 5px;
+                "
+              >
+                <label
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    font-size: 0.9em;
+                  "
+                >
+                  <input
+                    type="radio"
+                    name="customWordsOption"
+                    value="exclude"
+                    onchange="updateCustomWordsOption()"
+                  />
+                  Exclude Custom
+                </label>
+                <label
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    font-size: 0.9em;
+                  "
+                >
+                  <input
+                    type="radio"
+                    name="customWordsOption"
+                    value="include"
+                    checked
+                    onchange="updateCustomWordsOption()"
+                  />
+                  Include Custom
+                </label>
+                <label
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    font-size: 0.9em;
+                  "
+                >
+                  <input
+                    type="radio"
+                    name="customWordsOption"
+                    value="only"
+                    onchange="updateCustomWordsOption()"
+                  />
+                  Custom Only
+                </label>
+              </div>
+              <div style="text-align: center; font-size: 0.8em; color: #6c757d">
+                <span id="customWordsCount">0 custom words total</span>
+              </div>
+            </div>
+
+            <div class="word-display">
+              <div class="selected-words" id="selectedWords">
+                <div class="empty-state">
+                  Click "Get New Words" to start practicing!
+                </div>
+              </div>
+            </div>
+
+            <div class="controls">
+              <button class="btn btn-large" onclick="getRandomWords()">
+                Get New Words
+              </button>
+              <button
+                class="btn btn-secondary btn-small"
+                onclick="clearWords()"
+              >
+                Clear
+              </button>
+            </div>
+
+            <div class="hint-controls">
+              <button
+                class="btn btn-secondary"
+                id="genderHintBtn"
+                onclick="showGenderHints()"
+                style="display: none"
+              >
+                Show Gender Hints
+              </button>
+              <button
+                class="btn btn-secondary"
+                id="translationHintBtn"
+                onclick="showTranslationHints()"
+                style="display: none"
+              >
+                Show English Translations
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="manage">
+          <div class="import-section">
+            <div class="import-controls">
+              <h3>My Vocabulary Backup</h3>
+              <p>Save and restore your custom words AND learning preferences</p>
+              <button
+                class="btn"
+                onclick="downloadCompleteBackup()"
+                style="background: #28a745"
+              >
+                💾 Backup Everything
+              </button>
+              <button
+                class="btn btn-secondary"
+                onclick="document.getElementById('completeBackupInput').click()"
+              >
+                📂 Restore Everything
+              </button>
+              <input
+                type="file"
+                id="completeBackupInput"
+                accept=".json"
+                style="display: none"
+                onchange="loadCompleteBackup(event)"
+              />
+            </div>
+            <div class="import-status" id="importStatus"></div>
+          </div>
+
+          <div class="import-section">
+            <div class="import-controls">
+              <h3>Import Word Lists</h3>
+              <p>Load JSON files with vocabulary organized by skill level</p>
+              <input
+                type="file"
+                id="jsonFileInput"
+                accept=".json"
+                style="display: none"
+                onchange="loadJSONFile(event)"
+              />
+              <button
+                class="btn"
+                onclick="document.getElementById('jsonFileInput').click()"
+              >
+                Load JSON File
+              </button>
+              <button class="btn btn-secondary" onclick="downloadSampleJSON()">
+                Download Sample JSON
+              </button>
+            </div>
+          </div>
+
+          <div class="import-section">
+            <div class="import-controls">
+              <h3>Reset Word Weights</h3>
+              <p>Remove all frequency adjustments and un-retire all words</p>
+              <button class="btn btn-secondary" onclick="resetAllWordWeights()">
+                Reset All Word Weights
+              </button>
+            </div>
+          </div>
+
+          <div class="import-section">
+            <div class="import-controls">
+              <h3>Search Vocabulary</h3>
+              <p>
+                Type to search through all vocabulary - results appear as you
+                type
+              </p>
+              <div class="search-container">
+                <div class="search-input-container">
+                  <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Start typing a French word..."
+                    style="
+                      padding: 12px;
+                      border: 1px solid #dee2e6;
+                      border-radius: 8px;
+                      width: 100%;
+                      font-size: 1em;
+                    "
+                  />
+                  <div class="search-suggestions" id="searchSuggestions"></div>
+                </div>
+              </div>
+              <button
+                class="btn btn-secondary"
+                onclick="clearSearch()"
+                style="margin-top: 10px"
+              >
+                Clear Search
+              </button>
+            </div>
+            <div
+              class="import-status"
+              id="searchResults"
+              style="display: none"
+            ></div>
+          </div>
+
+          <div class="settings-section">
+            <div style="text-align: center; margin-bottom: 20px">
+              <h3>Add Custom Words</h3>
+              <p style="color: #6c757d">
+                Use the search above to check if a word already exists before
+                adding it as custom
+              </p>
+            </div>
+
+            <div class="category-group">
+              <div class="category-header">
+                <span class="category-title">Noms (Nouns)</span>
+                <span class="word-count" id="nounCountManage">0 words</span>
+              </div>
+              <div
+                style="margin-bottom: 10px; font-size: 0.9em; color: #6c757d"
+              >
+                Custom words only (⭐ = your additions):
+              </div>
+              <div class="word-list" id="nounList"></div>
+              <div class="add-word-form">
+                <input
+                  type="text"
+                  class="add-word-input"
+                  id="newNoun"
+                  placeholder="French word (e.g., maison)"
+                />
+                <select
+                  class="add-word-input"
+                  id="nounGender"
+                  style="width: auto"
+                >
+                  <option value="">Gender</option>
+                  <option value="m">Masculine (m)</option>
+                  <option value="f">Feminine (f)</option>
+                </select>
+                <input
+                  type="text"
+                  class="add-word-input"
+                  id="nounTranslation"
+                  placeholder="English translation"
+                />
+                <button class="add-word-btn" onclick="addCustomWord('nouns')">
+                  Add
+                </button>
+              </div>
+            </div>
+
+            <div class="category-group">
+              <div class="category-header">
+                <span class="category-title">Verbes (Verbs)</span>
+                <span class="word-count" id="verbCountManage">0 words</span>
+              </div>
+              <div
+                style="margin-bottom: 10px; font-size: 0.9em; color: #6c757d"
+              >
+                Custom words only (⭐ = your additions):
+              </div>
+              <div class="word-list" id="verbList"></div>
+              <div class="add-word-form">
+                <input
+                  type="text"
+                  class="add-word-input"
+                  id="newVerb"
+                  placeholder="French verb (e.g., manger)"
+                />
+                <input
+                  type="text"
+                  class="add-word-input"
+                  id="verbTranslation"
+                  placeholder="English translation"
+                />
+                <button class="add-word-btn" onclick="addCustomWord('verbs')">
+                  Add
+                </button>
+              </div>
+            </div>
+
+            <div class="category-group">
+              <div class="category-header">
+                <span class="category-title">Adjectifs (Adjectives)</span>
+                <span class="word-count" id="adjectiveCountManage"
+                  >0 words</span
+                >
+              </div>
+              <div
+                style="margin-bottom: 10px; font-size: 0.9em; color: #6c757d"
+              >
+                Custom words only (⭐ = your additions):
+              </div>
+              <div class="word-list" id="adjectiveList"></div>
+              <div class="add-word-form">
+                <input
+                  type="text"
+                  class="add-word-input"
+                  id="newAdjective"
+                  placeholder="French adjective (e.g., beau)"
+                />
+                <input
+                  type="text"
+                  class="add-word-input"
+                  id="adjectiveTranslation"
+                  placeholder="English translation"
+                />
+                <button
+                  class="add-word-btn"
+                  onclick="addCustomWord('adjectives')"
+                >
+                  Add
+                </button>
+              </div>
+            </div>
+
+            <div class="category-group">
+              <div class="category-header">
+                <span class="category-title">Adverbes (Adverbs)</span>
+                <span class="word-count" id="adverbCountManage">0 words</span>
+              </div>
+              <div
+                style="margin-bottom: 10px; font-size: 0.9em; color: #6c757d"
+              >
+                Custom words only (⭐ = your additions):
+              </div>
+              <div class="word-list" id="adverbList"></div>
+              <div class="add-word-form">
+                <input
+                  type="text"
+                  class="add-word-input"
+                  id="newAdverb"
+                  placeholder="French adverb (e.g., rapidement)"
+                />
+                <input
+                  type="text"
+                  class="add-word-input"
+                  id="adverbTranslation"
+                  placeholder="English translation"
+                />
+                <button class="add-word-btn" onclick="addCustomWord('adverbs')">
+                  Add
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="info">
+          <div class="info-section">
+            <h3>French Vocab Practice - Instructions & Updates</h3>
+
+            <h4>How to Use:</h4>
+            <p>
+              <strong>Practice Tab:</strong> Select your level range and choose
+              which word categories you want to practice. You can include or
+              exclude your custom words, or practice with custom words only.
+              Click "Get New Words" to start practicing with randomly selected
+              vocabulary.
+            </p>
+
+            <p>
+              <strong>Manage Words Tab:</strong> Search through all vocabulary
+              to see if words already exist, import/export word lists, and add
+              your own custom words. Custom words will appear in all difficulty
+              levels when enabled.
+            </p>
+
+            <h4>Features:</h4>
+            <ul>
+              <li>🔊 Click the speaker icon to hear French pronunciation</li>
+              <li>
+                📋 Click the clipboard icon to copy words to your clipboard
+              </li>
+              <li>
+                📖 Click the book icon to look up words in a French dictionary
+              </li>
+              <li>
+                Con Click the conjugation button (for verbs) to see verb
+                conjugations
+              </li>
+              <li>⚖️ Click the weight icon to adjust how often words appear</li>
+              <li>
+                👁️ Use hint buttons to show/hide gender markers and English
+                translations
+              </li>
+              <li>
+                ⭐ Add custom words that persist across all difficulty levels
+              </li>
+              <li>🔍 Live search through all vocabulary as you type</li>
+              <li>
+                📊 Level range selector to practice specific difficulty ranges
+              </li>
+            </ul>
+
+            <h4>Recent Updates:</h4>
+            <ul>
+              <li>Added word frequency weighting system</li>
+              <li>Added ability to retire words you know well</li>
+              <li>Enhanced backup system to include learning preferences</li>
+              <li>Added level range selector for flexible practice</li>
+              <li>Consolidated word structure for better organization</li>
+              <li>Words now cascade properly through difficulty levels</li>
+            </ul>
+
+            <h4>Tips:</h4>
+            <p>
+              Use the level range selector to focus your practice. Click the ⚖️
+              icon on any word to adjust how often it appears - reduce frequency
+              for words you know well, or retire them completely. The search
+              function is great for checking if a word already exists before
+              adding it as a custom word.
+            </p>
+
+            <p style="margin-top: 20px; font-style: italic; color: #6c757d">
+              Bonne chance avec vos études de français! (Good luck with your
+              French studies!)
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript will go here in the next section -->
+    <script>
+      // Initialize consolidated word lists with new structure
+      // PLACEHOLDER - INSERT YOUR CONSOLIDATED WORD LISTS HERE
+      const consolidatedWordLists = {
+        nouns: [
+          {
+            word: "amour",
+            gender: "m",
+            translation: "love",
+            levels: ["advanced"],
+          },
+          {
+            word: "appartement",
+            gender: "m",
+            translation: "apartment",
+            levels: ["intermediate", "advanced"],
+          },
+          {
+            word: "argent",
+            gender: "m",
+            translation: "money",
+            levels: ["beginner", "intermediate", "advanced"],
+          },
+          {
+            word: "eau",
+            gender: "f",
+            translation: "water",
+            levels: ["beginner", "intermediate", "advanced"],
+          },
+          {
+            word: "maison",
+            gender: "f",
+            translation: "house",
+            levels: ["beginner", "intermediate", "advanced"],
+          },
+          {
+            word: "voiture",
+            gender: "f",
+            translation: "car",
+            levels: ["beginner", "intermediate", "advanced"],
+          },
+        ],
+        verbs: [
+          {
+            word: "abandonner",
+            translation: "to abandon",
+            levels: ["advanced"],
+          },
+          {
+            word: "avoir",
+            translation: "to have",
+            levels: ["beginner", "intermediate", "advanced"],
+          },
+          {
+            word: "être",
+            translation: "to be",
+            levels: ["beginner", "intermediate", "advanced"],
+          },
+          {
+            word: "manger",
+            translation: "to eat",
+            levels: ["beginner", "intermediate", "advanced"],
+          },
+          {
+            word: "parler",
+            translation: "to speak",
+            levels: ["beginner", "intermediate", "advanced"],
+          },
+          {
+            word: "venir",
+            translation: "to come",
+            levels: ["intermediate", "advanced"],
+          },
+        ],
+        adjectives: [
+          {
+            word: "beau",
+            translation: "beautiful",
+            levels: ["beginner", "intermediate", "advanced"],
+          },
+          {
+            word: "grand",
+            translation: "big",
+            levels: ["beginner", "intermediate", "advanced"],
+          },
+          {
+            word: "petit",
+            translation: "small",
+            levels: ["beginner", "intermediate", "advanced"],
+          },
+          {
+            word: "bon",
+            translation: "good",
+            levels: ["beginner", "intermediate", "advanced"],
+          },
+          {
+            word: "difficile",
+            translation: "difficult",
+            levels: ["intermediate", "advanced"],
+          },
+          {
+            word: "facile",
+            translation: "easy",
+            levels: ["beginner", "intermediate", "advanced"],
+          },
+        ],
+        adverbs: [
+          {
+            word: "bien",
+            translation: "well",
+            levels: ["beginner", "intermediate", "advanced"],
+          },
+          {
+            word: "très",
+            translation: "very",
+            levels: ["beginner", "intermediate", "advanced"],
+          },
+          {
+            word: "souvent",
+            translation: "often",
+            levels: ["intermediate", "advanced"],
+          },
+          {
+            word: "toujours",
+            translation: "always",
+            levels: ["beginner", "intermediate", "advanced"],
+          },
+          {
+            word: "rapidement",
+            translation: "quickly",
+            levels: ["intermediate", "advanced"],
+          },
+          {
+            word: "lentement",
+            translation: "slowly",
+            levels: ["intermediate", "advanced"],
+          },
+        ],
+      };
+
+      // Function to pronounce French words using ResponsiveVoice
+      function pronounceWord(word) {
+        if (typeof responsiveVoice !== "undefined") {
+          responsiveVoice.speak(word, "French Female", {
+            rate: 0.95,
+            pitch: 1,
+            volume: 1,
+          });
+        } else {
+          console.log("ResponsiveVoice not loaded yet");
+          alert(
+            "Pronunciation feature is still loading. Please try again in a moment."
+          );
+        }
+      }
+
+      // Copy word to clipboard
+      function copyToClipboard(word) {
+        navigator.clipboard
+          .writeText(word)
+          .then(() => {
+            console.log(`Copied "${word}" to clipboard`);
+
+            const copyIcons = document.querySelectorAll(".copy-icon");
+            copyIcons.forEach((icon) => {
+              if (icon.onclick.toString().includes(word)) {
+                const originalText = icon.textContent;
+                icon.textContent = "✓";
+                setTimeout(() => {
+                  icon.textContent = originalText;
+                }, 1000);
+              }
+            });
+          })
+          .catch((err) => {
+            console.error("Failed to copy to clipboard:", err);
+            alert(`Copy this word: ${word}`);
+          });
+      }
+
+      // Open French dictionary in new tab
+      function openDictionary(word) {
+        const dictionaryUrl = `https://www.larousse.fr/dictionnaires/francais/${encodeURIComponent(
+          word
+        )}`;
+        window.open(dictionaryUrl, "_blank");
+      }
+
+      // Open French conjugation in new tab
+      function openConjugation(word) {
+        const conjugationUrl = `https://conjugaison.lemonde.fr/conjugaison/premier-groupe/${encodeURIComponent(
+          word
+        )}/`;
+        window.open(conjugationUrl, "_blank");
+      }
+
+      // Current level range and word lists
+      let currentLevelStart = "beginner";
+      let currentLevelEnd = "advanced";
+      let currentSelectedWords = [];
+      let customWordsOption = "include"; // 'exclude', 'include', or 'only'
+
+      // Custom words that appear in all difficulty levels
+      let customWords = {
+        nouns: [],
+        verbs: [],
+        adjectives: [],
+        adverbs: [],
+      };
+
+      // User word preferences for weighting
+      let userWordPreferences = {};
+
+      // Set word weight with confirmation for retirement
+      function setWordWeight(word, weight) {
+        if (weight === 0.0 || weight === 0) {
+          const confirmed = confirm(
+            `Are you sure you want to retire "${word}"?\n\nThis word will no longer appear in practice sessions.`
+          );
+          if (!confirmed) return;
+        }
+
+        if (!userWordPreferences[word]) {
+          userWordPreferences[word] = {
+            weight: 1.0,
+            lastSeen: null,
+            timesShown: 0,
+          };
+        }
+
+        userWordPreferences[word].weight = weight;
+        userWordPreferences[word].lastSeen = new Date().toISOString();
+
+        saveUserPreferences();
+        updateWeightDisplay(word);
+
+        console.log(`Word "${word}" weight set to ${weight}`);
+      }
+
+      // Toggle weight controls visibility
+      function toggleWeightControls(word) {
+        const controlsId = `weight-controls-${word.replace(
+          /[^a-zA-Z0-9]/g,
+          ""
+        )}`;
+        const controls = document.getElementById(controlsId);
+
+        // Hide all other weight controls first
+        document.querySelectorAll(".weight-controls").forEach((ctrl) => {
+          if (ctrl.id !== controlsId) {
+            ctrl.style.display = "none";
+          }
+        });
+
+        // Toggle this one
+        if (controls) {
+          controls.style.display =
+            controls.style.display === "none" ? "block" : "none";
+        }
+      }
+
+      // Update weight display for a specific word
+      function updateWeightDisplay(word) {
+        const weight = userWordPreferences[word]?.weight || 1.0;
+        const displayId = `weight-display-${word.replace(/[^a-zA-Z0-9]/g, "")}`;
+        const display = document.getElementById(displayId);
+        if (display) {
+          display.textContent =
+            weight === 0.0 || weight === 0 ? "Retired" : `${weight}x`;
+        }
+      }
+
+      // Save user preferences to localStorage
+      function saveUserPreferences() {
+        try {
+          localStorage.setItem(
+            "frenchWordPreferences",
+            JSON.stringify(userWordPreferences)
+          );
+          console.log("User preferences saved successfully");
+        } catch (e) {
+          console.log("Could not save user preferences:", e);
+        }
+      }
+
+      // Load user preferences from localStorage
+      function loadUserPreferences() {
+        try {
+          const saved = localStorage.getItem("frenchWordPreferences");
+          if (saved) {
+            userWordPreferences = JSON.parse(saved);
+            console.log("Loaded user preferences");
+          }
+        } catch (e) {
+          console.log("Could not load user preferences:", e);
+        }
+      }
+
+      // Reset all word weights
+      function resetAllWordWeights() {
+        const confirmed = confirm(
+          "Are you sure you want to reset ALL word weights to normal?\n\nThis will remove all weight adjustments and un-retire all words."
+        );
+        if (confirmed) {
+          userWordPreferences = {};
+          saveUserPreferences();
+          alert("All word weights have been reset to normal.");
+          console.log("All word weights reset");
+        }
+      }
+
+      // Update level range when selectors change
+      function updateLevelRange() {
+        currentLevelStart = document.getElementById("levelStart").value;
+        currentLevelEnd = document.getElementById("levelEnd").value;
+
+        // Ensure end level is not before start level
+        const levelOrder = ["beginner", "intermediate", "advanced"];
+        const startIndex = levelOrder.indexOf(currentLevelStart);
+        const endIndex = levelOrder.indexOf(currentLevelEnd);
+
+        if (endIndex < startIndex) {
+          document.getElementById("levelEnd").value = currentLevelStart;
+          currentLevelEnd = currentLevelStart;
+        }
+
+        updateWordCounts();
+        console.log(
+          `Level range changed to: ${currentLevelStart} to ${currentLevelEnd}`
+        );
+      }
+
+      // Get words that match the current level range
+      function getWordsForLevelRange(words) {
+        const levelOrder = ["beginner", "intermediate", "advanced"];
+        const startIndex = levelOrder.indexOf(currentLevelStart);
+        const endIndex = levelOrder.indexOf(currentLevelEnd);
+        const targetLevels = levelOrder.slice(startIndex, endIndex + 1);
+
+        return words.filter((word) => {
+          // Check if word appears in target levels
+          const appearsInTargetLevels = word.levels.some((level) =>
+            targetLevels.includes(level)
+          );
+
+          // Check if word appears ONLY in target levels (no lower levels)
+          const hasLowerLevels = word.levels.some((level) => {
+            const levelIndex = levelOrder.indexOf(level);
+            return levelIndex < startIndex;
+          });
+
+          return appearsInTargetLevels && !hasLowerLevels;
+        });
+      }
+
+      // Update custom words option
+      function updateCustomWordsOption() {
+        const selectedOption = document.querySelector(
+          'input[name="customWordsOption"]:checked'
+        );
+        if (selectedOption) {
+          customWordsOption = selectedOption.value;
+          console.log(`Custom words option changed to: ${customWordsOption}`);
+          updateWordCounts();
+        }
+      }
+
+      // Update custom words count display
+      function updateCustomWordsCount() {
+        const totalCustomWords = Object.values(customWords).reduce(
+          (total, category) => total + category.length,
+          0
+        );
+        document.getElementById(
+          "customWordsCount"
+        ).textContent = `${totalCustomWords} custom words total`;
+      }
+
+      // Get random words based on user selection and level range
+      function getRandomWords() {
+        console.log("Getting random words...");
+        const selectedWords = [];
+
+        const categories = [
+          {
+            name: "nouns",
+            checkboxId: "includeNouns",
+            numberId: "nounNumber",
+            singularName: "nom",
+          },
+          {
+            name: "verbs",
+            checkboxId: "includeVerbs",
+            numberId: "verbNumber",
+            singularName: "verbe",
+          },
+          {
+            name: "adjectives",
+            checkboxId: "includeAdjectives",
+            numberId: "adjectiveNumber",
+            singularName: "adjectif",
+          },
+          {
+            name: "adverbs",
+            checkboxId: "includeAdverbs",
+            numberId: "adverbNumber",
+            singularName: "adverbe",
+          },
+        ];
+
+        let allAvailableWords = [];
+
+        categories.forEach((cat) => {
+          const checkbox = document.getElementById(cat.checkboxId);
+          const numberInput = document.getElementById(cat.numberId);
+
+          if (checkbox && checkbox.checked) {
+            let builtInWords = [];
+            let customWordsForCategory = [];
+
+            // Get built-in words for the level range
+            if (customWordsOption !== "only") {
+              const allBuiltInWords = consolidatedWordLists[cat.name] || [];
+              builtInWords = getWordsForLevelRange(allBuiltInWords);
+            }
+
+            // Get custom words (they appear at all levels)
+            if (customWordsOption !== "exclude") {
+              customWordsForCategory = customWords[cat.name] || [];
+            }
+
+            const allWords = [...builtInWords, ...customWordsForCategory];
+
+            if (allWords.length > 0) {
+              const count = Math.min(
+                parseInt(numberInput.value) || 1,
+                allWords.length
+              );
+
+              // Add words to the pool with their category and requested count
+              allWords.forEach((item) => {
+                allAvailableWords.push({
+                  word: typeof item === "object" ? item.word : item,
+                  category: cat.singularName,
+                  categoryName: cat.name,
+                  gender: typeof item === "object" ? item.gender : null,
+                  translation:
+                    typeof item === "object" ? item.translation : null,
+                  isCustom: typeof item === "object" ? item.isCustom : false,
+                  requestedCount: count,
+                  originalCategory: cat.name,
+                });
+              });
+            }
+          }
+        });
+
+        if (allAvailableWords.length === 0) {
+          document.getElementById("selectedWords").innerHTML =
+            '<div class="empty-state">No words available. Please select at least one category and check your custom words settings.</div>';
+          return;
+        }
+
+        // IMPROVED SHUFFLING: Fisher-Yates shuffle algorithm
+        function fisherYatesShuffle(array) {
+          const shuffled = [...array]; // Create a copy
+          for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+          }
+          return shuffled;
+        }
+
+        // ANTI-REPETITION: Track recently used words
+        const recentlyUsedKey = "frenchRecentWords";
+        let recentlyUsed = [];
+
+        try {
+          const stored = localStorage.getItem(recentlyUsedKey);
+          if (stored) {
+            recentlyUsed = JSON.parse(stored);
+          }
+        } catch (e) {
+          console.log("Could not load recently used words:", e);
+        }
+
+        // Remove recently used words from available pool if we have enough alternatives
+        const maxRecentToRemove = Math.min(
+          recentlyUsed.length,
+          Math.floor(allAvailableWords.length * 0.3)
+        );
+        let filteredWords = allAvailableWords;
+
+        // Calculate total words needed
+        const totalWordsNeeded = categories.reduce((total, cat) => {
+          const checkbox = document.getElementById(cat.checkboxId);
+          const numberInput = document.getElementById(cat.numberId);
+          if (checkbox && checkbox.checked) {
+            return total + (parseInt(numberInput.value) || 1);
+          }
+          return total;
+        }, 0);
+
+        if (allAvailableWords.length - maxRecentToRemove >= totalWordsNeeded) {
+          filteredWords = allAvailableWords.filter(
+            (wordItem) => !recentlyUsed.includes(wordItem.word)
+          );
+        }
+
+        // If we still don't have enough, use all available words
+        if (filteredWords.length < totalWordsNeeded) {
+          filteredWords = allAvailableWords;
+        }
+
+        // Apply proper shuffle
+        const shuffled = fisherYatesShuffle(filteredWords);
+
+        // Select words by category to respect the requested counts
+        const selectedByCategory = {};
+        categories.forEach((cat) => {
+          selectedByCategory[cat.name] = [];
+        });
+
+        // Fill each category with its requested count
+        categories.forEach((cat) => {
+          const checkbox = document.getElementById(cat.checkboxId);
+          const numberInput = document.getElementById(cat.numberId);
+
+          if (checkbox && checkbox.checked) {
+            const requestedCount = parseInt(numberInput.value) || 1;
+            const categoryWords = shuffled.filter(
+              (item) => item.originalCategory === cat.name
+            );
+            const selectedCount = Math.min(
+              requestedCount,
+              categoryWords.length
+            );
+
+            for (let i = 0; i < selectedCount; i++) {
+              if (categoryWords[i]) {
+                selectedWords.push({
+                  word: categoryWords[i].word,
+                  category: categoryWords[i].category,
+                  gender: categoryWords[i].gender,
+                  translation: categoryWords[i].translation,
+                  isCustom: categoryWords[i].isCustom,
+                });
+              }
+            }
+          }
+        });
+
+        // Update recently used list
+        const newRecentlyUsed = selectedWords.map((w) => w.word);
+        const maxRecentHistory = 30; // Remember last 30 words
+        recentlyUsed = [...newRecentlyUsed, ...recentlyUsed].slice(
+          0,
+          maxRecentHistory
+        );
+
+        try {
+          localStorage.setItem(recentlyUsedKey, JSON.stringify(recentlyUsed));
+        } catch (e) {
+          console.log("Could not save recently used words:", e);
+        }
+
+        currentSelectedWords = selectedWords;
+        displaySelectedWords(selectedWords);
+
+        // Show/hide hint buttons
+        const hasNouns = selectedWords.some(
+          (item) =>
+            (item.category === "nom" || item.category === "noun") && item.gender
+        );
+        const hasAnyWords = selectedWords.length > 0;
+
+        document.getElementById("genderHintBtn").style.display = hasNouns
+          ? "inline-block"
+          : "none";
+        document.getElementById("translationHintBtn").style.display =
+          hasAnyWords ? "inline-block" : "none";
+
+        console.log(
+          `Selected ${selectedWords.length} words from ${allAvailableWords.length} available. Recently used: ${recentlyUsed.length}`
+        );
+      }
+
+      // Display selected words with custom word styling and weight controls
+      function displaySelectedWords(words) {
+        const container = document.getElementById("selectedWords");
+
+        if (words.length === 0) {
+          container.innerHTML =
+            '<div class="empty-state">No words selected. Check your settings and try again.</div>';
+          return;
+        }
+
+        container.innerHTML = words
+          .map((item) => {
+            const customStyle = item.isCustom
+              ? 'style="color: #ffffff; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.3); background: linear-gradient(45deg, #b39ddb, #9575cd);"'
+              : "";
+            const customIndicator = item.isCustom ? "⭐ " : "";
+            const wordId = item.word.replace(/[^a-zA-Z0-9]/g, "");
+            const currentWeight = userWordPreferences[item.word]?.weight || 1.0;
+
+            // Create conjugation icon only for verbs
+            const conjugationIcon =
+              item.category === "verbe" || item.category === "verb"
+                ? `<span class="conjugation-icon" onclick="openConjugation('${item.word}')" title="View verb conjugations">Con</span>`
+                : "";
+
+            return `<div class="word-tag" ${customStyle}>
+                    <div class="word-main-line">
+                        ${
+                          item.gender &&
+                          (item.category === "nom" || item.category === "noun")
+                            ? `<span class="inline-gender ${
+                                item.gender === "f" ? "feminine" : "masculine"
+                              }" style="display: none;">(${item.gender})</span>`
+                            : ""
+                        }
+                        ${customIndicator}${item.word}
+                        <span class="speaker-icon" onclick="pronounceWord('${
+                          item.word
+                        }')" title="Click to hear pronunciation">🔊</span>
+                        <span class="copy-icon" onclick="copyToClipboard('${
+                          item.word
+                        }')" title="Copy word to clipboard">📋</span>
+                        <span class="dict-icon" onclick="openDictionary('${
+                          item.word
+                        }')" title="Look up in French dictionary">📖</span>
+                        ${conjugationIcon}
+                        <span class="weight-icon" onclick="toggleWeightControls('${
+                          item.word
+                        }')" title="Adjust word frequency">⚖️</span>
+                        <span class="category-label">(${item.category})</span>
+                    </div>
+                    ${
+                      item.translation
+                        ? `<div class="inline-translation" style="display: none;">${item.translation}</div>`
+                        : ""
+                    }
+                    <div class="weight-controls" id="weight-controls-${wordId}" style="display: none; margin-top: 10px; text-align: center; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 8px;">
+                        <div style="margin-bottom: 8px; font-size: 0.8em; color: rgba(255,255,255,0.9);">
+                            Frequency: <span id="weight-display-${wordId}">${
+              currentWeight === 0.0 || currentWeight === 0
+                ? "Retired"
+                : currentWeight + "x"
+            }</span>
+                        </div>
+                        <div style="display: flex; gap: 4px; justify-content: center; flex-wrap: wrap;">
+                            <button onclick="setWordWeight('${
+                              item.word
+                            }', 0.2)" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); color: white; border-radius: 4px; padding: 4px 6px; font-size: 0.7em; cursor: pointer;" title="Show much less often">➖➖</button>
+                            <button onclick="setWordWeight('${
+                              item.word
+                            }', 0.5)" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); color: white; border-radius: 4px; padding: 4px 6px; font-size: 0.7em; cursor: pointer;" title="Show less often">➖</button>
+                            <button onclick="setWordWeight('${
+                              item.word
+                            }', 1.0)" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); color: white; border-radius: 4px; padding: 4px 6px; font-size: 0.7em; cursor: pointer;" title="Normal frequency">●</button>
+                            <button onclick="setWordWeight('${
+                              item.word
+                            }', 1.5)" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); color: white; border-radius: 4px; padding: 4px 6px; font-size: 0.7em; cursor: pointer;" title="Show more often">➕</button>
+                            <button onclick="setWordWeight('${
+                              item.word
+                            }', 2.5)" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); color: white; border-radius: 4px; padding: 4px 6px; font-size: 0.7em; cursor: pointer;" title="Show much more often">➕➕</button>
+                            <button onclick="setWordWeight('${
+                              item.word
+                            }', 0.0)" style="background: rgba(220, 53, 69, 0.7); border: 1px solid rgba(220, 53, 69, 0.9); color: white; border-radius: 4px; padding: 4px 6px; font-size: 0.7em; cursor: pointer;" title="Retire this word">❌</button>
+                        </div>
+                    </div>
+                </div>`;
+          })
+          .join("");
+      }
+
+      // Clear selected words
+      function clearWords() {
+        document.getElementById("selectedWords").innerHTML =
+          '<div class="empty-state">Click "Get New Words" to start practicing!</div>';
+        currentSelectedWords = [];
+        document.getElementById("genderHintBtn").style.display = "none";
+        document.getElementById("translationHintBtn").style.display = "none";
+      }
+
+      function showGenderHints() {
+        const inlineGenders = document.querySelectorAll(".inline-gender");
+
+        // Toggle inline gender indicators
+        inlineGenders.forEach((gender) => {
+          gender.style.display =
+            gender.style.display === "none" ? "inline-block" : "none";
+        });
+      }
+
+      function showTranslationHints() {
+        const inlineTranslations = document.querySelectorAll(
+          ".inline-translation"
+        );
+
+        // Toggle inline translations
+        inlineTranslations.forEach((translation) => {
+          translation.style.display =
+            translation.style.display === "none" ? "block" : "none";
+        });
+      }
+
+      // Add this helper function to normalize accented characters
+      function normalizeForSearch(text) {
+        return text
+          .toLowerCase()
+          .normalize("NFD") // Decompose accented characters
+          .replace(/[\u0300-\u036f]/g, "") // Remove accent marks
+          .replace(/['']/g, "'"); // Normalize different apostrophe types
+      }
+
+      // Updated performLiveSearch function
+      function performLiveSearch(searchTerm) {
+        if (!searchTerm || searchTerm.length < 1) {
+          hideSuggestions();
+          return;
+        }
+
+        const wordMap = new Map(); // Use Map to consolidate duplicate words
+        const maxResults = 50;
+
+        // Normalize the search term for comparison
+        const normalizedSearchTerm = normalizeForSearch(searchTerm);
+
+        // Search through consolidated word lists
+        Object.keys(consolidatedWordLists).forEach((category) => {
+          const words = consolidatedWordLists[category] || [];
+          words.forEach((wordItem) => {
+            const word = wordItem.word;
+            const normalizedWord = normalizeForSearch(word);
+
+            // Check if normalized word starts with normalized search term
+            if (normalizedWord.startsWith(normalizedSearchTerm)) {
+              const key = word.toLowerCase();
+              if (!wordMap.has(key)) {
+                wordMap.set(key, {
+                  word: word,
+                  category: category.slice(0, -1), // Remove 's'
+                  gender: wordItem.gender || null,
+                  translation: wordItem.translation || null,
+                  levels: wordItem.levels || [],
+                  isCustom: false,
+                });
+              }
+            }
+          });
+        });
+
+        // Also search custom words
+        Object.keys(customWords).forEach((category) => {
+          const words = customWords[category] || [];
+          words.forEach((wordItem) => {
+            const word =
+              typeof wordItem === "object" ? wordItem.word : wordItem;
+            const normalizedWord = normalizeForSearch(word);
+
+            // Check if normalized word starts with normalized search term
+            if (normalizedWord.startsWith(normalizedSearchTerm)) {
+              const key = word.toLowerCase();
+              if (!wordMap.has(key)) {
+                wordMap.set(key, {
+                  word: word,
+                  category: category.slice(0, -1), // Remove 's'
+                  gender: typeof wordItem === "object" ? wordItem.gender : null,
+                  translation:
+                    typeof wordItem === "object" ? wordItem.translation : null,
+                  levels: ["custom"],
+                  isCustom: true,
+                });
+              }
+            }
+          });
+        });
+
+        // Convert Map to array and sort
+        const results = Array.from(wordMap.values()).slice(0, maxResults);
+
+        // Sort results: exact matches first, then by length, then alphabetically
+        results.sort((a, b) => {
+          const aExact = normalizeForSearch(a.word) === normalizedSearchTerm;
+          const bExact = normalizeForSearch(b.word) === normalizedSearchTerm;
+          if (aExact && !bExact) return -1;
+          if (!aExact && bExact) return 1;
+          if (a.word.length !== b.word.length)
+            return a.word.length - b.word.length;
+          return a.word.localeCompare(b.word);
+        });
+
+        displaySuggestions(results, searchTerm);
+      }
+
+      // Display search suggestions
+      function displaySuggestions(results, searchTerm) {
+        const suggestionsContainer =
+          document.getElementById("searchSuggestions");
+
+        if (results.length === 0) {
+          suggestionsContainer.innerHTML = `<div class="no-suggestions">No matches found for "${searchTerm}"<br><small>You can add it as a custom word below</small></div>`;
+          suggestionsContainer.style.display = "block";
+          return;
+        }
+
+        const suggestionsHtml = results
+          .map((result) => {
+            const genderDisplay = result.gender ? ` (${result.gender})` : "";
+            const translationDisplay = result.translation
+              ? ` - ${result.translation}`
+              : "";
+            const customClass = result.isCustom ? " suggestion-custom" : "";
+            const customIndicator = result.isCustom ? "⭐ " : "";
+
+            // Format levels display
+            const levelsDisplay =
+              result.levels.length > 0 ? result.levels.join(", ") : "";
+
+            return `<div class="suggestion-item${customClass}" onclick="selectSuggestion('${result.word.replace(
+              /'/g,
+              "\\'"
+            )}', '${result.levels[0]}', '${result.category}')">
+                    <div class="suggestion-word">${customIndicator}${
+              result.word
+            }${genderDisplay}</div>
+                    <div class="suggestion-details">${
+                      result.category
+                    } - ${levelsDisplay}${translationDisplay}</div>
+                </div>`;
+          })
+          .join("");
+
+        suggestionsContainer.innerHTML = suggestionsHtml;
+        suggestionsContainer.style.display = "block";
+      }
+
+      // Hide suggestions
+      function hideSuggestions() {
+        document.getElementById("searchSuggestions").style.display = "none";
+      }
+
+      // Select a suggestion
+      function selectSuggestion(word, level, category) {
+        const searchInput = document.getElementById("searchInput");
+        searchInput.value = word;
+        hideSuggestions();
+
+        // Find the complete word data to show enhanced details
+        let wordData = null;
+
+        // Search in built-in vocabulary
+        if (level !== "custom") {
+          const words = consolidatedWordLists[category + "s"] || [];
+          wordData = words.find(
+            (item) => item.word.toLowerCase() === word.toLowerCase()
+          );
+        } else {
+          // Search in custom words
+          const words = customWords[category + "s"] || [];
+          wordData = words.find((item) => {
+            const itemWord = typeof item === "object" ? item.word : item;
+            return itemWord.toLowerCase() === word.toLowerCase();
+          });
+        }
+
+        // Display enhanced word details
+        if (wordData) {
+          displayEnhancedWordDetails(wordData, word, level, category);
+        } else {
+          showSearchResults(
+            `<strong>Selected: ${word}</strong><br>Found in: ${level} ${category}`,
+            "success"
+          );
+        }
+      }
+
+      // Display enhanced word details with full interactive features
+      function displayEnhancedWordDetails(wordData, word, level, category) {
+        const isCustom = level === "custom";
+        const gender = wordData.gender || null;
+        const translation = wordData.translation || null;
+        const levels = wordData.levels || [];
+
+        let detailsHtml = `<div style="padding: 15px; background: #f8f9fa; border-radius: 10px; border-left: 4px solid ${
+          isCustom ? "#9575cd" : "#667eea"
+        };">`;
+
+        // Word header with interactive icons
+        detailsHtml += `<div style="display: flex; align-items: center; margin-bottom: 10px; flex-wrap: wrap;">`;
+        detailsHtml += `<h4 style="margin: 0; color: #495057; font-size: 1.3em;">${
+          isCustom ? "⭐ " : ""
+        }${word}`;
+
+        // Add gender for nouns
+        if (gender && category === "noun") {
+          const genderColor = gender === "f" ? "#e74c3c" : "#3498db";
+          detailsHtml += ` <span style="color: ${genderColor}; font-weight: bold; margin-left: 5px;">(${gender})</span>`;
+        }
+
+        detailsHtml += `</h4>`;
+
+        // Interactive icons (same styling as practice tab)
+        detailsHtml += `<div style="margin-left: auto; display: flex; gap: 8px;">`;
+        detailsHtml += `<span class="speaker-icon" onclick="pronounceWord('${word}')" title="Click to hear pronunciation" style="cursor: pointer; margin: 0 5px; font-size: 1.2em; opacity: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8)); transition: all 0.2s; background: rgba(255,255,255,0.2); border-radius: 3px; padding: 2px 4px;">🔊</span>`;
+        detailsHtml += `<span class="copy-icon" onclick="copyToClipboard('${word}')" title="Copy word to clipboard" style="cursor: pointer; margin: 0 5px; font-size: 1.2em; opacity: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8)); transition: all 0.2s; background: rgba(255,255,255,0.2); border-radius: 3px; padding: 2px 4px;">📋</span>`;
+        detailsHtml += `<span class="dict-icon" onclick="openDictionary('${word}')" title="Look up in French dictionary" style="cursor: pointer; margin: 0 5px; font-size: 1.2em; opacity: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8)); transition: all 0.2s; background: rgba(255,255,255,0.2); border-radius: 3px; padding: 2px 4px;">📖</span>`;
+
+        // Add conjugation icon for verbs
+        if (category === "verb") {
+          detailsHtml += `<span class="conjugation-icon" onclick="openConjugation('${word}')" title="View verb conjugations" style="cursor: pointer; margin: 0 5px; font-size: 0.7em; background: rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.5); border-radius: 4px; padding: 3px 5px; font-weight: bold; text-shadow: 0 1px 2px rgba(0,0,0,0.8);">Con</span>`;
+        }
+
+        detailsHtml += `</div></div>`;
+
+        // Translation
+        if (translation) {
+          detailsHtml += `<div style="font-size: 1.1em; color: #6c757d; margin-bottom: 8px; font-style: italic;">${translation}</div>`;
+        }
+
+        // Category and level info
+        detailsHtml += `<div style="font-size: 0.9em; color: #6c757d;">`;
+        detailsHtml += `<strong>Category:</strong> ${
+          category.charAt(0).toUpperCase() + category.slice(1)
+        }<br>`;
+        detailsHtml += `<strong>Levels:</strong> ${levels.join(", ")}`;
+        detailsHtml += `</div></div>`;
+
+        showSearchResults(detailsHtml, "success");
+      }
+
+      // Add new custom word to a category
+      function addCustomWord(category) {
+        let word,
+          translation,
+          gender = null;
+
+        if (category === "nouns") {
+          word = document.getElementById("newNoun").value.trim().toLowerCase();
+          translation = document.getElementById("nounTranslation").value.trim();
+          gender = document.getElementById("nounGender").value;
+
+          if (!word || !translation || !gender) {
+            alert(
+              "Please fill in all fields for the noun (word, gender, and translation)."
+            );
+            return;
+          }
+        } else if (category === "verbs") {
+          word = document.getElementById("newVerb").value.trim().toLowerCase();
+          translation = document.getElementById("verbTranslation").value.trim();
+
+          if (!word || !translation) {
+            alert("Please fill in both the verb and its translation.");
+            return;
+          }
+        } else if (category === "adjectives") {
+          word = document
+            .getElementById("newAdjective")
+            .value.trim()
+            .toLowerCase();
+          translation = document
+            .getElementById("adjectiveTranslation")
+            .value.trim();
+
+          if (!word || !translation) {
+            alert("Please fill in both the adjective and its translation.");
+            return;
+          }
+        } else if (category === "adverbs") {
+          word = document
+            .getElementById("newAdverb")
+            .value.trim()
+            .toLowerCase();
+          translation = document
+            .getElementById("adverbTranslation")
+            .value.trim();
+
+          if (!word || !translation) {
+            alert("Please fill in both the adverb and its translation.");
+            return;
+          }
+        }
+
+        // Auto-search for existing word before adding
+        const existingWords = searchForExistingWord(word);
+
+        if (existingWords.length > 0) {
+          const locations = existingWords
+            .map((r) => `${r.levels.join("/")} ${r.category}`)
+            .join(", ");
+          const shouldContinue = confirm(
+            `⚠️ The word "${word}" already exists in: ${locations}\n\nDo you still want to add it to your custom words?`
+          );
+
+          if (!shouldContinue) {
+            return;
+          }
+        }
+
+        // Check if word already exists in custom words
+        const existingCustomWord = customWords[category].find(
+          (item) => (typeof item === "object" ? item.word : item) === word
+        );
+
+        if (existingCustomWord) {
+          alert("This word is already in your custom word list.");
+          return;
+        }
+
+        // Add the word to custom words
+        if (category === "nouns") {
+          customWords[category].push({
+            word: word,
+            gender: gender,
+            translation: translation,
+            isCustom: true,
+          });
+          // Clear form
+          document.getElementById("newNoun").value = "";
+          document.getElementById("nounGender").value = "";
+          document.getElementById("nounTranslation").value = "";
+        } else {
+          customWords[category].push({
+            word: word,
+            translation: translation,
+            isCustom: true,
+          });
+          // Clear form
+          if (category === "verbs") {
+            document.getElementById("newVerb").value = "";
+            document.getElementById("verbTranslation").value = "";
+          } else if (category === "adjectives") {
+            document.getElementById("newAdjective").value = "";
+            document.getElementById("adjectiveTranslation").value = "";
+          } else if (category === "adverbs") {
+            document.getElementById("newAdverb").value = "";
+            document.getElementById("adverbTranslation").value = "";
+          }
+        }
+
+        saveCustomWords();
+        updateWordLists();
+        updateWordCounts();
+        updateCustomWordsCount();
+
+        console.log(
+          `Added custom ${category.slice(0, -1)}: ${word} (${translation})`
+        );
+      }
+
+      // Helper function to search for existing word (returns results array)
+      function searchForExistingWord(searchTerm) {
+        const results = [];
+
+        // Search through consolidated word lists
+        Object.keys(consolidatedWordLists).forEach((category) => {
+          const words = consolidatedWordLists[category] || [];
+          words.forEach((wordItem) => {
+            if (wordItem.word.toLowerCase() === searchTerm.toLowerCase()) {
+              results.push({
+                word: wordItem.word,
+                levels: wordItem.levels,
+                category: category.slice(0, -1), // Remove 's' from category name
+                gender: wordItem.gender || null,
+                translation: wordItem.translation || null,
+              });
+            }
+          });
+        });
+
+        return results;
+      }
+
+      // Remove custom word from category
+      function removeCustomWord(category, word) {
+        customWords[category] = customWords[category].filter(
+          (item) => (typeof item === "object" ? item.word : item) !== word
+        );
+        saveCustomWords();
+        updateWordLists();
+        updateWordCounts();
+      }
+
+      // Update word lists display - now only shows custom words
+      function updateWordLists() {
+        Object.keys(consolidatedWordLists).forEach((category) => {
+          const listElement = document.getElementById(
+            `${category.slice(0, -1)}List`
+          );
+          const countElement = document.getElementById(
+            `${category.slice(0, -1)}CountManage`
+          );
+
+          // Only show custom words in the manage section
+          const customWordsForCategory = customWords[category] || [];
+
+          // Count words available for current level range
+          const builtInWords = getWordsForLevelRange(
+            consolidatedWordLists[category] || []
+          );
+
+          listElement.innerHTML = customWordsForCategory
+            .map((item) => {
+              const word = typeof item === "object" ? item.word : item;
+
+              return `<div class="word-item" style="color: #1565c0; font-weight: 600; background: #e3f2fd; border: 2px solid #1976d2;">
+                        ⭐ ${word}
+                        <span class="remove-word" onclick="removeCustomWord('${category}', '${word}')">×</span>
+                    </div>`;
+            })
+            .join("");
+
+          // Show total count (built-in + custom) but only display custom
+          const customCount = customWordsForCategory.length;
+          const totalCount = builtInWords.length + customCount;
+          countElement.textContent =
+            `${totalCount} total words` +
+            (customCount > 0
+              ? ` (${customCount} custom shown)`
+              : " (no custom words)");
+        });
+      }
+
+      // Update word counts in practice tab
+      function updateWordCounts() {
+        // Count words available for current level range + custom words
+        Object.keys(consolidatedWordLists).forEach((category) => {
+          const builtInWords = getWordsForLevelRange(
+            consolidatedWordLists[category] || []
+          );
+          const customWordsForCategory = customWords[category] || [];
+
+          let totalCount = 0;
+          if (customWordsOption === "exclude") {
+            totalCount = builtInWords.length;
+          } else if (customWordsOption === "include") {
+            totalCount = builtInWords.length + customWordsForCategory.length;
+          } else if (customWordsOption === "only") {
+            totalCount = customWordsForCategory.length;
+          }
+
+          const categoryName = category.slice(0, -1); // Remove 's'
+          document.getElementById(`${categoryName}Count`).textContent =
+            totalCount;
+        });
+      }
+
+      // Save custom words function - saves to localStorage
+      function saveCustomWords() {
+        try {
+          localStorage.setItem(
+            "frenchCustomWords",
+            JSON.stringify(customWords)
+          );
+          console.log("Custom words saved successfully");
+        } catch (e) {
+          console.log("Could not save custom words:", e);
+        }
+      }
+
+      // Load saved custom words from localStorage
+      function loadSavedCustomWords() {
+        try {
+          const saved = localStorage.getItem("frenchCustomWords");
+          if (saved) {
+            customWords = JSON.parse(saved);
+            console.log("Loaded saved custom words");
+          }
+        } catch (e) {
+          console.log("Could not load saved custom words:", e);
+        }
+      }
+
+      // Load JSON file with word lists
+      function loadJSONFile(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          try {
+            const jsonData = JSON.parse(e.target.result);
+
+            if (validateJSONStructure(jsonData)) {
+              // For consolidated format, merge into consolidatedWordLists
+              Object.keys(jsonData).forEach((category) => {
+                if (consolidatedWordLists[category]) {
+                  consolidatedWordLists[category] = [
+                    ...consolidatedWordLists[category],
+                    ...jsonData[category],
+                  ];
+                }
+              });
+              updateWordCounts();
+              updateWordLists();
+              showImportStatus("JSON file loaded successfully!", "success");
+            } else {
+              showImportStatus(
+                "Invalid JSON structure. Please check the format.",
+                "error"
+              );
+            }
+          } catch (error) {
+            showImportStatus(
+              "Error parsing JSON file: " + error.message,
+              "error"
+            );
+          }
+        };
+        reader.readAsText(file);
+      }
+
+      // Validate JSON structure for consolidated format
+      function validateJSONStructure(data) {
+        const requiredCategories = ["nouns", "verbs", "adjectives", "adverbs"];
+
+        // Check if it's consolidated format
+        const hasConsolidatedStructure = requiredCategories.some(
+          (category) => data[category] && Array.isArray(data[category])
+        );
+
+        if (hasConsolidatedStructure) {
+          // Validate consolidated structure
+          for (const category of requiredCategories) {
+            if (data[category] && Array.isArray(data[category])) {
+              for (const item of data[category]) {
+                if (!item.word || !item.levels || !Array.isArray(item.levels)) {
+                  return false;
+                }
+              }
+            }
+          }
+          return true;
+        }
+
+        return false;
+      }
+
+      // Show import status message
+      function showImportStatus(message, type) {
+        const statusDiv = document.getElementById("importStatus");
+        statusDiv.textContent = message;
+        statusDiv.className = `import-status ${type}`;
+
+        setTimeout(() => {
+          statusDiv.style.display = "none";
+        }, 5000);
+      }
+
+      // Download sample JSON file
+      function downloadSampleJSON() {
+        const sample = {
+          nouns: [
+            {
+              word: "livre",
+              gender: "m",
+              translation: "book",
+              levels: ["beginner", "intermediate", "advanced"],
+            },
+            {
+              word: "table",
+              gender: "f",
+              translation: "table",
+              levels: ["beginner", "intermediate", "advanced"],
+            },
+          ],
+          verbs: [
+            {
+              word: "lire",
+              translation: "to read",
+              levels: ["beginner", "intermediate", "advanced"],
+            },
+            {
+              word: "écrire",
+              translation: "to write",
+              levels: ["beginner", "intermediate", "advanced"],
+            },
+          ],
+          adjectives: [
+            {
+              word: "rouge",
+              translation: "red",
+              levels: ["beginner", "intermediate", "advanced"],
+            },
+            {
+              word: "intelligent",
+              translation: "intelligent",
+              levels: ["beginner", "intermediate", "advanced"],
+            },
+          ],
+          adverbs: [
+            {
+              word: "maintenant",
+              translation: "now",
+              levels: ["beginner", "intermediate", "advanced"],
+            },
+            {
+              word: "jamais",
+              translation: "never",
+              levels: ["beginner", "intermediate", "advanced"],
+            },
+          ],
+        };
+
+        const jsonString = JSON.stringify(sample, null, 2);
+
+        try {
+          const blob = new Blob([jsonString], { type: "application/json" });
+          const url = URL.createObjectURL(blob);
+          const downloadLink = document.createElement("a");
+          downloadLink.href = url;
+          downloadLink.download = "french_vocab_sample_consolidated.json";
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+          document.body.removeChild(downloadLink);
+          URL.revokeObjectURL(url);
+
+          showImportStatus("Sample JSON downloaded!", "success");
+        } catch (error) {
+          console.error("Download failed:", error);
+          showImportStatus("Download failed - check console", "error");
+        }
+      }
+
+      // Download complete backup (custom words + preferences)
+      function downloadCompleteBackup() {
+        if (
+          !customWords ||
+          Object.keys(customWords).every((key) => customWords[key].length === 0)
+        ) {
+          if (
+            !userWordPreferences ||
+            Object.keys(userWordPreferences).length === 0
+          ) {
+            showImportStatus(
+              "No custom words or word preferences to backup!",
+              "error"
+            );
+            return;
+          }
+        }
+
+        const backup = {
+          timestamp: new Date().toISOString(),
+          customWords: customWords,
+          wordPreferences: userWordPreferences,
+        };
+
+        const jsonString = JSON.stringify(backup, null, 2);
+
+        try {
+          const blob = new Blob([jsonString], { type: "application/json" });
+          const url = URL.createObjectURL(blob);
+          const downloadLink = document.createElement("a");
+          downloadLink.href = url;
+          downloadLink.download = `my_french_vocabulary_${
+            new Date().toISOString().split("T")[0]
+          }.json`;
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+          document.body.removeChild(downloadLink);
+          URL.revokeObjectURL(url);
+
+          showImportStatus("Complete vocabulary backup downloaded!", "success");
+        } catch (error) {
+          console.error("Backup failed:", error);
+          showImportStatus("Backup failed - check console", "error");
+        }
+      }
+
+      // Load complete backup (custom words + preferences)
+      function loadCompleteBackup(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          try {
+            const backupData = JSON.parse(e.target.result);
+
+            // Check if it's a valid backup file
+            if (backupData.customWords || backupData.wordPreferences) {
+              // Merge with existing data or replace them
+              const shouldReplace = confirm(
+                "Do you want to REPLACE your current data with the backup, or MERGE them together?\n\nClick OK to REPLACE, Cancel to MERGE"
+              );
+
+              if (shouldReplace) {
+                if (backupData.customWords) {
+                  customWords = backupData.customWords;
+                }
+                if (backupData.wordPreferences) {
+                  userWordPreferences = backupData.wordPreferences;
+                }
+              } else {
+                // Merge custom words
+                if (backupData.customWords) {
+                  Object.keys(backupData.customWords).forEach((category) => {
+                    if (Array.isArray(backupData.customWords[category])) {
+                      backupData.customWords[category].forEach((word) => {
+                        const exists = customWords[category].find(
+                          (existing) =>
+                            (typeof existing === "object"
+                              ? existing.word
+                              : existing) ===
+                            (typeof word === "object" ? word.word : word)
+                        );
+                        if (!exists) {
+                          customWords[category].push(word);
+                        }
+                      });
+                    }
+                  });
+                }
+
+                // Merge word preferences
+                if (backupData.wordPreferences) {
+                  Object.keys(backupData.wordPreferences).forEach((word) => {
+                    if (!userWordPreferences[word]) {
+                      userWordPreferences[word] =
+                        backupData.wordPreferences[word];
+                    }
+                  });
+                }
+              }
+
+              saveCustomWords();
+              saveUserPreferences();
+              updateWordCounts();
+              updateWordLists();
+              updateCustomWordsCount();
+              showImportStatus(
+                "Complete vocabulary backup restored successfully!",
+                "success"
+              );
+            } else {
+              showImportStatus("Invalid backup file format.", "error");
+            }
+          } catch (error) {
+            showImportStatus(
+              "Error reading backup file: " + error.message,
+              "error"
+            );
+          }
+        };
+        reader.readAsText(file);
+      }
+
+      // Show search results
+      function showSearchResults(message, type) {
+        const resultsDiv = document.getElementById("searchResults");
+        resultsDiv.innerHTML = message;
+        resultsDiv.className = `import-status ${type}`;
+        resultsDiv.style.display = "block";
+      }
+
+      // Clear search
+      function clearSearch() {
+        document.getElementById("searchInput").value = "";
+        document.getElementById("searchResults").style.display = "none";
+        hideSuggestions();
+      }
+
+      // Setup live search event listeners
+      function setupLiveSearch() {
+        const searchInput = document.getElementById("searchInput");
+        let searchTimeout;
+
+        searchInput.addEventListener("input", (e) => {
+          clearTimeout(searchTimeout);
+          searchTimeout = setTimeout(() => {
+            performLiveSearch(e.target.value);
+          }, 200); // Debounce search by 200ms
+        });
+
+        searchInput.addEventListener("focus", (e) => {
+          if (e.target.value) {
+            performLiveSearch(e.target.value);
+          }
+        });
+
+        // Hide suggestions when clicking outside
+        document.addEventListener("click", (e) => {
+          if (!e.target.closest(".search-container")) {
+            hideSuggestions();
+          }
+        });
+
+        // Handle keyboard navigation
+        searchInput.addEventListener("keydown", (e) => {
+          const suggestions = document.querySelectorAll(".suggestion-item");
+          if (suggestions.length === 0) return;
+
+          let currentIndex = -1;
+          suggestions.forEach((item, index) => {
+            if (item.classList.contains("active")) {
+              currentIndex = index;
+              item.classList.remove("active");
+            }
+          });
+
+          if (e.key === "ArrowDown") {
+            e.preventDefault();
+            currentIndex = Math.min(currentIndex + 1, suggestions.length - 1);
+            suggestions[currentIndex].classList.add("active");
+          } else if (e.key === "ArrowUp") {
+            e.preventDefault();
+            currentIndex = Math.max(currentIndex - 1, 0);
+            suggestions[currentIndex].classList.add("active");
+          } else if (e.key === "Enter") {
+            e.preventDefault();
+            if (currentIndex >= 0) {
+              suggestions[currentIndex].click();
+            }
+          } else if (e.key === "Escape") {
+            hideSuggestions();
+          }
+        });
+      }
+
+      // Tab switching
+      function setupTabSwitching() {
+        document.querySelectorAll(".tab").forEach((tab) => {
+          tab.addEventListener("click", () => {
+            document
+              .querySelectorAll(".tab")
+              .forEach((t) => t.classList.remove("active"));
+            document
+              .querySelectorAll(".tab-content")
+              .forEach((content) => content.classList.remove("active"));
+
+            tab.classList.add("active");
+            document.getElementById(tab.dataset.tab).classList.add("active");
+
+            if (tab.dataset.tab === "manage") {
+              updateWordLists();
+            }
+          });
+        });
+      }
+
+      // Handle Enter key in input fields
+      function setupKeyHandlers() {
+        document.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
+            const target = e.target;
+            if (
+              target.id === "newNoun" ||
+              target.id === "nounGender" ||
+              target.id === "nounTranslation"
+            ) {
+              addCustomWord("nouns");
+            } else if (
+              target.id === "newVerb" ||
+              target.id === "verbTranslation"
+            ) {
+              addCustomWord("verbs");
+            } else if (
+              target.id === "newAdjective" ||
+              target.id === "adjectiveTranslation"
+            ) {
+              addCustomWord("adjectives");
+            } else if (
+              target.id === "newAdverb" ||
+              target.id === "adverbTranslation"
+            ) {
+              addCustomWord("adverbs");
+            }
+          }
+        });
+      }
+
+      // Initialize the app
+      function initializeApp() {
+        updateWordCounts();
+        updateWordLists();
+        loadSavedCustomWords(); // Load any saved custom vocabulary from localStorage
+        loadUserPreferences(); // Load word preferences
+        updateWordCounts(); // Update counts again after loading custom words
+        updateWordLists(); // Update lists again after loading custom words
+        updateCustomWordsCount(); // Update custom words count
+
+        // Setup event handlers after DOM is ready
+        setupLiveSearch(); // Setup the live search functionality
+        setupTabSwitching(); // Setup tab switching
+        setupKeyHandlers(); // Setup keyboard handlers
+      }
+
+      // Wait for DOM to be ready before initializing
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initializeApp);
+      } else {
+        initializeApp();
+      }
+
+      // Register service worker for PWA functionality
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register(
+            "data:text/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdpbnN0YWxsJywgZXZlbnQgPT4gewogIGV2ZW50LndhaXRVbnRpbChzZWxmLnNraXBXYWl0aW5nKCkpOwp9KTsKCnNlbGYuYWRkRXZlbnRMaXN0ZW5lcignYWN0aXZhdGUnLCBldmVudCA9PiB7CiAgZXZlbnQud2FpdFVudGlsKHNlbGYuY2xpZW50cy5jbGFpbSgpKTsKfSk7CgpzZWxmLmFkZEV2ZW50TGlzdGVuZXIoJ2ZldGNoJywgZXZlbnQgPT4gewogIGV2ZW50LnJlc3BvbmRXaXRoKGZldGNoKGV2ZW50LnJlcXVlc3QpKTsKfSk7"
+          )
+          .then(() => console.log("Service Worker registered"))
+          .catch((err) => console.log("Service Worker registration failed"));
+      }
+    </script>
+  </body>
+</html>
