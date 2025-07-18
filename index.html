@@ -10580,10 +10580,11 @@
       }
 
       // Open French conjugation in new tab
+      // Open French conjugation in new tab
       function openConjugation(word) {
-        const conjugationUrl = `https://conjugaison.lemonde.fr/conjugaison/premier-groupe/${encodeURIComponent(
+        const conjugationUrl = `https://conjugator.reverso.net/conjugation-french-verb-${encodeURIComponent(
           word
-        )}/`;
+        )}.html`;
         window.open(conjugationUrl, "_blank");
       }
 
